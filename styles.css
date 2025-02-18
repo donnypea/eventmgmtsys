@@ -34,7 +34,7 @@ header {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
     backdrop-filter: blur(10px);
-    width: 350px;
+    width: 300px;
 }
 
 .logo {
