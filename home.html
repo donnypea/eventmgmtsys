@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+       body {
+            background-color: #D9C3A8; /* Almond */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #6D4C41; /* Chai */
+            color: white;
+            padding: 15px;
+            margin: 50px
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo i {
+            font-size: 28px;
+        }
+        .nav {
+            display: flex;
+            gap: 15px;
+        }
+        .nav button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .nav button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .container {
+            margin-top: 100px; /* Space for fixed header */
+            padding: 20px;
+            text-align: center;
+        }
+        h2 {
+            color: #6D4C41; /* Chai */
+        }
+        .search-bar {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .search-bar input {
+            width: 60%;
+            padding: 10px;
+            border: 1px solid #6D4C41;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .event-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .event-card {
+            background-color: #FFF5E1; /* Vanilla */
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: left;
+        }
+        .event-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .event-card h3 {
+            margin: 10px 0 5px;
+            color: #6D4C41;
+        }
+        .event-card p {
+            font-size: 14px;
+            color: #4E342E; /* Carob */
+        }
+        .event-card .event-date {
+            font-weight: bold;
+            color: #8E6B55; /* Macha */
+        }
+        .event-card button {
+            background-color: #8E6B55; /* Macha */
+            color: white;
+            border: none;
+            padding: 8px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .event-card button:hover {
+            background-color: #6D4C41;
+        }
+        footer {
+            background-color: #6D4C41; /* Chai */
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            margin: 10% auto;
+            width: 50%;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .close-btn {
+            cursor: pointer;
+        }
+        .close-btn:hover {
+            color: #D9534F;
+        }
+    </style>
+    <script>
+        function searchEvents() {
+            let input = document.getElementById("eventSearch").value.toLowerCase();
+            let eventCards = document.getElementsByClassName("event-card");
+
+            for (let i = 0; i < eventCards.length; i++) {
+                let eventTitle = eventCards[i].getElementsByTagName("h3")[0].innerText.toLowerCase();
+                let eventDescription = eventCards[i].getElementsByTagName("p")[1].innerText.toLowerCase();
+
+                if (eventTitle.includes(input) || eventDescription.includes(input)) {
+                    eventCards[i].style.display = "block";
+                } else {
+                    eventCards[i].style.display = "none";
+                }
+            }
+        }
+
+      
+
+        function showDetails(title, date, description) {
+            document.getElementById("modalTitle").innerText = title;
+            document.getElementById("modalDate").innerText = date;
+            document.getElementById("modalDescription").innerText = description;
+            document.getElementById("eventModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("eventModal").style.display = "none";
+        }
+    </script>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <i class="fas fa-calendar-alt"></i> Eventzki
+        </div>
+        <nav class="nav">
+            <button onclick="location.href='home.html'"><i class="fas fa-home"></i> Home</button>
+            <button onclick="location.href='about.html'"><i class="fas fa-info-circle"></i> About</button>
+            <button onclick="location.href='feedback.html'"><i class="fas fa-comments"></i> Feedback</button>
+            <button onclick="location.href='contact.html'"><i class="fas fa-envelope"></i> Contact</button>
+            <button onclick="location.href='login.html'"><i class="fas fa-sign-in-alt"></i> Logout</button>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Upcoming Events</h2>
+        
+        <div class="search-bar">
+            <input type="text" id="eventSearch" placeholder="Search events..." onkeyup="searchEvents()">
+        </div>
+
+        <div class="event-list">
+            <div class="event-card">
+                <img src="images/aclcweek.jpeg" alt="Music Festival">
+                <h3>ACLC Week 2024</h3>
+                <p class="event-date">March 25, 2024</p>
+                <p>Don't miss out the best week in ACLC. Be patient and be excite.</p>
+                <button onclick="showDetails('ACLC Week 2024', 'March 15, 2025', 'Join us for a night of live music, food, and entertainment.')">View Details</button>
+            </div>
+            <div class="event-card">
+                <img src="images/musicfest.jpeg" alt="Music Festival">
+                <h3>Music Festival 2025</h3>
+                <p class="event-date">March 15, 2025</p>
+                <p>Join us for a night of live music, food, and entertainment.</p>
+                <button onclick="showDetails('Music Festival 2025', 'March 15, 2025', 'Join us for a night of live music, food, and entertainment.')">View Details</button>
+            </div>
+            <div class="event-card">
+                <img src="images/techconfe.jpeg" alt="Tech Conference">
+                <h3>Tech Conference</h3>
+                <p class="event-date">April 10, 2025</p>
+                <p>Explore the latest trends in technology and innovation.</p>
+                <button onclick="showDetails('Tech Conference', 'April 10, 2025', 'Explore the latest trends in technology and innovation.')">View Details</button>
+            </div>
+            <div class="event-card">
+                <img src="images/charity.jpeg" alt="Charity Run">
+                <h3>Charity Run</h3>
+                <p class="event-date">May 5, 2025</p>
+                <p>Run for a cause and help raise funds for charity. Go Go Run!</p>
+                <button onclick="showDetails('Charity Run', 'May 5, 2025', 'Run for a cause and help raise funds for charity.')">View Details</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h3 id="modalTitle"></h3>
+            <p id="modalDate"></p>
+            <p id="modalDescription"></p>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Event Management. All rights reserved.
+    </footer>
+
+</body>
+</html>

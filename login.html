@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background-color: #D9C3A8; /* Almond */
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .header {
+            background-color: #6D4C41; /* Chai */
+            color: white;
+            padding: 15px;
+            width: 100%;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .login-container {
+            background-color: #FFF5E1; /* Vanilla */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 100px; /* Adjusted for fixed header */
+        }
+        h2 {
+            color: #6D4C41; /* Chai */
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #6D4C41;
+            position: relative;
+        }
+        .input-group i {
+            margin-right: 10px;
+            color: #4E342E; /* Carob */
+        }
+        .input-group input {
+            border: none;
+            background: none;
+            outline: none;
+            flex: 1;
+            font-size: 16px;
+            color: #3E2723;
+        }
+        .toggle-password {
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            color: #4E342E;
+        }
+        .login-btn {
+            background-color: #8E6B55; /* Macha */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .login-btn:hover {
+            background-color: #6D4C41;
+        }
+        .register-link {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .register-link a {
+            color: #6D4C41;
+            text-decoration: none;
+        }
+        footer {
+            background-color: #6D4C41; /* Chai */
+            color: white;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>Welcome User!</h1>
+    </header>
+
+    <div class="login-container">
+        <h2>Login here!</h2>
+        <form onsubmit="loginUser(event)">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <i class="fas fa-eye toggle-password" onclick="togglePassword()"></i>
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+            <p class="register-link">Don't have an account? <a href="#">Register</a></p>
+        </form>
+    </div>
+
+    <footer>
+        &copy; 2025 Event Management. All rights reserved.
+    </footer>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.querySelector('.toggle-password');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+
+        function loginUser(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const username = document.querySelector('input[name="username"]').value.trim();
+            const password = document.querySelector('input[name="password"]').value.trim();
+
+            if (username === "admin" && password === "admin123") {
+                window.location.href = "admin-dashboard.html";
+            } else if (username === "user" && password === "user123") {
+                window.location.href = "home.html";
+            } else {
+                alert("Invalid username or password!");
+            }
+        }
+    </script>
+</body>
+</html>
